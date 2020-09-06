@@ -1,0 +1,108 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+	
+	\usepackage{01-env}
+\makeatother
+
+
+\begin{document}
+
+\section{Écriture \texttt{pseudo verbatim}}
+
+\newparaexample{Avec toutes les options}
+
+\inputlatexex{examples/pseudo-verb-all-options.extra.tex}
+
+
+Voici comment s'utilise chacune des clés.
+
+\begin{enumerate}
+	\item \verb#title# permet de donner un titre si un cadre est utilisé. Un titre vide sera ignoré. Par défaut cette option est de valeur vide.
+
+	\item \verb#frame# demande d'ajouter un cadre autour du contenu.
+
+	\item \verb#center# sert à centrer le contenu.
+
+	\item \verb#width# permet de donner un coefficient multiplicatif à appliquer à la largeur de la ligne. Par défaut cette option vaut \verb#1#.
+\end{enumerate}
+
+
+% ---------------------- %
+
+
+\newparaexample{Juste un cadre en plus}
+
+\inputlatexex{examples/pseudo-verb-just-frame.extra.tex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Sans option}
+
+Dans l'exemple suivant, il ne faut pas oublier d'utiliser \verb#[]# avec l'environnement.
+ 
+\inputlatexex{examples/pseudo-verb-no-option.extra.tex}
+
+
+Voici ce qu'il se passe si l'on oublie \verb#[]# avant le contenu
+\footnote{
+	\LaTeX\ ignore les espaces au début du contenu car il commence par chercher un crochet ouvrant indiquant une option du point de vue de l'environnement.
+}.
+ 
+\inputlatexex{examples/pseudo-verb-no-option-bad.extra.tex}
+
+
+% ---------------------- %
+
+
+\newparaexample{Macros interprétées}
+
+Ci-après est utilisée \macro{squaremacro} qui a été définie par \verb#\newcommand\squaremacro{$x^2$}#.
+
+\newcommand\squaremacro{$x^2$}
+
+\inputlatexex{examples/pseudo-verb-env-with-macro.extra.tex}
+
+
+\begin{remark}
+	Ceci permet de définir des contenus indentés de type langage de programmation assez facilement via la définition de macros de mise en forme de mots clé.
+\end{remark}
+
+
+% ---------------------- %
+
+
+\newparaexample{Du contenu sur plusieurs pages}
+
+Même avec un cadre un contenu pourra se trouver sur des pages successives.
+
+\begin{figure}[hbt!]
+	\centering
+	\frame{\includegraphics[scale = .5]{images/pseudo-verb-broken[fr].png}}
+\end{figure}
+
+
+% ---------------------- %
+
+
+\section{Fiches techniques}
+
+\IDenv[o]{pseudoverb}{1}
+
+\IDoption{} on utilise un système clé/valeur.
+\begin{enumerate}
+	\item \verb#title# est le titre du cadre.
+	      Par défaut \verb#title = {}#.
+
+	\item \verb#frame# demande d'ajouter un cadre.
+
+	\item \verb#center# sert à centrer le contenu.
+
+	\item \verb#width# donne le coefficient multiplicatif à appliquer à la largeur de la ligne.
+	      Par défaut \verb#width = 1#.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,50 @@
+% ---------------------- %
+% -- IMPORTS REQUIRED -- %
+% ---------------------- %
+
+% A
+\RequirePackage{alltt}
+% S
+\RequirePackage{simplekv}
+
+
+% --------- %
+% -- ENV -- %
+% --------- %
+
+\setKVdefault[tnspverb@pseudo@verb@keys]{%
+    frame = false,
+    center = false,
+    title = {},
+    width = 1
+}
+
+
+\newenvironment{pseudoverb}[1][]{
+    \useKVdefault[tnspverb@pseudo@verb@keys]%
+    \setKV[tnspverb@pseudo@verb@keys]{#1}%
+    \edef\thiswidth{\useKV[tnspverb@pseudo@verb@keys]{width}}%
+    %
+    \edef\thistitle{\useKV[tnspverb@pseudo@verb@keys]{title}}%
+	%
+    \ifboolKV[tnspverb@pseudo@verb@keys]{center}{\centering}{}
+    %
+    \ifboolKV[tnspverb@pseudo@verb@keys]{frame}{%
+        \begin{tcolorbox}[
+            width              = \thiswidth\linewidth,
+            title/.expand once = \thistitle,
+            fonttitle          = \bfseries\itshape\small,
+            coltitle           = black,
+            colbacktitle       = black!10!white,
+            colback            = white,
+            breakable,
+            center title]
+    }{}
+    \small\alltt
+}{
+    \endalltt\normalsize
+    \ifboolKV[tnspverb@pseudo@verb@keys]{frame}{%
+    	\vspace{-2em}
+    	\end{tcolorbox}
+	}{}
+}
