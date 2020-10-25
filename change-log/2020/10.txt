@@ -1,0 +1,11 @@
+==========
+2020-10-25
+==========
+
+**New minor version version::``0.1.0-beta``
+
+
+**Environment ``pseudoverb``:** the option ``width`` has benn renamed ``scale``.
+
+
+**Documentation:** some enhancements have been done.

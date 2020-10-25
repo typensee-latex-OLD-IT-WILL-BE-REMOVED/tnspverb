@@ -1,6 +1,7 @@
 % == PACKAGES USED == %
 
 \RequirePackage{alltt}
+\RequirePackage{tcolorbox}
 
 \RequirePackage{simplekv}
 
@@ -8,25 +9,24 @@
 % == DEFINITIONS == %
 
 \setKVdefault[tnspverb@pseudo@verb@keys]{%
-    frame = false,
+    frame  = false,
     center = false,
-    title = {},
-    width = 1
+    title  = {},
+    scale  = 1
 }
 
 
 \newenvironment{pseudoverb}[1][]{
     \useKVdefault[tnspverb@pseudo@verb@keys]%
     \setKV[tnspverb@pseudo@verb@keys]{#1}%
-    \edef\thiswidth{\useKV[tnspverb@pseudo@verb@keys]{width}}%
-    %
+    \edef\thisscale{\useKV[tnspverb@pseudo@verb@keys]{scale}}%
     \edef\thistitle{\useKV[tnspverb@pseudo@verb@keys]{title}}%
-	%
+    %
     \ifboolKV[tnspverb@pseudo@verb@keys]{center}{\centering}{}
     %
     \ifboolKV[tnspverb@pseudo@verb@keys]{frame}{%
         \begin{tcolorbox}[
-            width              = \thiswidth\linewidth,
+            width              = \thisscale\linewidth,
             title/.expand once = \thistitle,
             fonttitle          = \bfseries\itshape\small,
             coltitle           = black,

@@ -16,23 +16,23 @@
 \inputlatexex{examples/pseudo-verb-all-options.extra.tex}
 
 
-Voici comment s'utilise chacune des clés.
+Voici comment s'utilise chacune des options.
 
 \begin{enumerate}
-	\item \verb#title# permet de donner un titre si un cadre est utilisé. Un titre vide sera ignoré. Par défaut cette option est de valeur vide.
+	\item \verb#title# permet de donner un titre \textbf{si un cadre est utilisé}. Un titre vide sera ignoré. Par défaut cette option est de valeur vide.
 
 	\item \verb#frame# demande d'ajouter un cadre autour du contenu.
 
 	\item \verb#center# sert à centrer le contenu.
 
-	\item \verb#width# permet de donner un coefficient multiplicatif à appliquer à la largeur de la ligne. Par défaut cette option vaut \verb#1#.
+	\item \verb#scale# permet de donner un coefficient d'échelle à appliquer à la largeur de la ligne. Par défaut cette option vaut \verb#1#.
 \end{enumerate}
 
 
 % ---------------------- %
 
 
-\newparaexample{Juste un cadre en plus}
+\newparaexample{Ajouter juste un cadre}
 
 \inputlatexex{examples/pseudo-verb-just-frame.extra.tex}
 
@@ -40,19 +40,29 @@ Voici comment s'utilise chacune des clés.
 % ---------------------- %
 
 
-\newparaexample{Sans option}
+\newparaexample{Sans option, un piège à éviter !}
 
-Dans l'exemple suivant, il ne faut pas oublier d'utiliser \verb#[]# avec l'environnement.
- 
-\inputlatexex{examples/pseudo-verb-no-option.extra.tex}
-
-
-Voici ce qu'il se passe si l'on oublie \verb#[]# avant le contenu
-\footnote{
-	\LaTeX\ ignore les espaces au début du contenu car il commence par chercher un crochet ouvrant indiquant une option du point de vue de l'environnement.
-}.
+Voici un 1\ier{} exemple montrant qu'il faut faire attention quand on ne veut pas indiquer d'option.
+Il semble naturel d'omettre \verb#[]# avant le contenu mais ce qui suit met en lumière un petit problème quand on veut garder tous les espaces  initiaux du contenu.
  
 \inputlatexex{examples/pseudo-verb-no-option-bad.extra.tex}
+
+
+Ce qui précède est tout à fait normal puisque \LaTeX\ ignore les espaces au début du contenu lorsqu'il commence par chercher un crochet ouvrant indiquant une option du point de vue de l'environnement.
+Une fois que \LaTeX\ tombe sur un caractère autre que \verb#[# , l'option par défaut est utilisée mais malheureusement les espaces initiaux ont été mangés, ils sont perdus à tout jamais.
+Pour éviter le problème précédent, il suffit d'utiliser une option vide via \verb#[]# comme ci-dessous.
+ 
+\inputlatexex{examples/pseudo-verb-no-option-good.extra.tex}
+
+
+Le code suivant montre que \LaTeX\ peut voir une option là où l'on voudrait indiquer un contenu. Bien que l'option ne soit pas correcte, elle est silencieusement ignorée en coulisse. Ceci explique que ce qui est entre des crochets ci-dessous ne soit pas affiché.
+
+\inputlatexex{examples/pseudo-verb-pseudo-option-error.extra.tex}
+
+
+De nouveau la solution consiste à utiliser une option vide \verb#[]# comme le montre l'exemple ci-après.
+
+\inputlatexex{examples/pseudo-verb-pseudo-option-error-good.extra.tex}
 
 
 % ---------------------- %
@@ -60,16 +70,15 @@ Voici ce qu'il se passe si l'on oublie \verb#[]# avant le contenu
 
 \newparaexample{Macros interprétées}
 
-Ci-après est utilisée \macro{squaremacro} qui a été définie par \verb#\newcommand\squaremacro{$x^2$}#.
+Dans ce document, \macro{squaremacro} a été définie par \verb#\newcommand\squaremacro{$x^2$}#.
+Le code ci-après montre que l'environnement \env{pseudoverb} interprète les macros
+\footnote{
+	Ceci permet de définir assez facilement des contenus indentés de type langage de programmation via la définition de macros de mise en forme des mots-clés.
+}.
 
 \newcommand\squaremacro{$x^2$}
 
 \inputlatexex{examples/pseudo-verb-env-with-macro.extra.tex}
-
-
-\begin{remark}
-	Ceci permet de définir des contenus indentés de type langage de programmation assez facilement via la définition de macros de mise en forme de mots clé.
-\end{remark}
 
 
 % ---------------------- %
@@ -101,8 +110,8 @@ Même avec un cadre un contenu pourra se trouver sur des pages successives.
 
 	\item \verb#center# sert à centrer le contenu.
 
-	\item \verb#width# donne le coefficient multiplicatif à appliquer à la largeur de la ligne.
-	      Par défaut \verb#width = 1#.
+	\item \verb#scale# donne le coefficient multiplicatif à appliquer à la largeur de la ligne.
+	      Par défaut \verb#scale = 1#.
 \end{enumerate}
 
 \end{document}
